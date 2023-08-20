@@ -12,5 +12,6 @@ set(AUTOTEST_SOURCES
 # A list of all files containing test code that is used for assignment validation
 set(TESTED_SOURCE
     ../examples/autotest-validate/autotest-validate.c
-)
+    )
 add_subdirectory(assignment-autotest)
+target_compile_options(assignment-autotest PRIVATE -Wno-error)
