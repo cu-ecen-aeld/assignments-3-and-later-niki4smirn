@@ -107,6 +107,7 @@ cp writer finder.sh finder-test.sh ${OUTDIR}/rootfs/home
 mkdir ${OUTDIR}/rootfs/home/conf
 cp conf/username.txt ${OUTDIR}/rootfs/home/conf
 cp conf/assignment.txt ${OUTDIR}/rootfs/home/conf
+cp autorun-qemu.sh ${OUTDIR}/rootfs/home
 
 # TODO: Chown the root directory
 cd ${OUTDIR}/rootfs
