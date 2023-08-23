@@ -36,10 +36,9 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
     echo "Checking out version ${KERNEL_VERSION}"
     git checkout ${KERNEL_VERSION}
 
+    git apply ${FINDER_APP_DIR}/fix.patch 
+
     echo "Patching"
-    wget ${PATCH_PATH} 
-    # ls
-    git apply dtc-multiple-definition.patch
 
     # TODO: Add your kernel build steps here
     echo "Building kernel"
@@ -47,6 +46,7 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
     make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
     make -j4 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} all
     make ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} dtbs 
+
 fi
 
 echo "Adding the Image in outdir"
