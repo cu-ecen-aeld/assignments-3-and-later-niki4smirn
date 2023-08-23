@@ -12,7 +12,6 @@ BUSYBOX_VERSION=1_33_1
 FINDER_APP_DIR=$(realpath $(dirname $0))
 ARCH=arm64
 CROSS_COMPILE=aarch64-none-linux-gnu-
-LIBC_PATH=/home/niki4smirn/arm-cross-compiler/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu/libc
 PATCH_PATH=https://raw.githubusercontent.com/bwalle/ptxdist-vetero/f1332461242e3245a47b4685bc02153160c0a1dd/patches/linux-5.0/dtc-multiple-definition.patch
 
 if [ $# -lt 1 ]
@@ -90,10 +89,8 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "program interpreter"
 ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 
 # TODO: Add library dependencies to rootfs
-cp ${LIBC_PATH}/lib/ld-linux-aarch64.so.1 lib/
-cp ${LIBC_PATH}/lib64/libc.so.6 lib64/
-cp ${LIBC_PATH}/lib64/libm.so.6 lib64/
-cp ${LIBC_PATH}/lib64/libresolv.so.2 lib64/
+cp ${FINDER_APP_DIR}/deps/lib/* lib/
+cp ${FINDER_APP_DIR}/deps/lib64/* lib64/
 
 # TODO: Make device nodes
 sudo mknod -m 666 dev/null c 1 3
